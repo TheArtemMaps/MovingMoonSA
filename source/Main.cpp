@@ -1,6 +1,6 @@
 #include "plugin.h"
 #include "Moon.h"
-#include "M:\rubbish-sa\gta3 bullet traces\starryskies gta 3\source\MemoryMgr.h"
+#include "MemoryMgr.h"
 using namespace plugin;
 plugin::ThiscallEvent<AddressList<0x7178F0, H_CALL>, PRIORITY_BEFORE, ArgPickNone, void()> renderMoon;
 
