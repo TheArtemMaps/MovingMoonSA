@@ -1,3 +1,4 @@
+
 #include "plugin.h"
 
 #include "CGame.h"
@@ -42,7 +43,6 @@ CMoon::Render() {
 		RwV3dAdd(&worldpos, &campos, &pos);
 		if (CSprite::CalcScreenCoors(worldpos, &screenpos, &szx, &szy, false, true)) {
 			szx /= CDraw::ms_fAspectRatio;
-			//szy /= CDraw::ms_fAspectRatio;
 			RwRenderStateSet(rwRENDERSTATETEXTURERASTER, RwTextureGetRaster(gpCoronaTexture[2]));
 			RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, (void*)TRUE);
 			RwRenderStateSet(rwRENDERSTATESRCBLEND, (void*)rwBLENDONE);
