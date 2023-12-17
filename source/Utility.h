@@ -26,7 +26,15 @@ static float DistanceSqr2D(const CVector2D& v, float x, float y) {
 }
 
 #define SQR(x) ((x) * (x))
-
+#define RwV3dAddMacro(o, a, b)                                  \
+MACRO_START                                                     \
+{                                                               \
+    (o)->x = (((a)->x) + ( (b)->x));                            \
+    (o)->y = (((a)->y) + ( (b)->y));                            \
+    (o)->z = (((a)->z) + ( (b)->z));                            \
+}                                                               \
+MACRO_STOP                               
+#define RwV3dAdd(o, a, b) RwV3dAddMacro(o, a, b)
 static int32_t GetRandomNumber() {
     return rand() & RAND_MAX;
 }
