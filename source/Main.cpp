@@ -1,4 +1,3 @@
-
 #include "plugin.h"
 #include "Moon.h"
 #include "MemoryMgr.h"
@@ -6,6 +5,11 @@
 #include <game_sa/CCamera.h>
 #include "CCoronas.h"
 #include "Utility.h"
+#include <game_sa/CSprite.h>
+#include "CClouds.h"
+#include "CClock.h"
+#include "CGame.h"
+#include <game_sa/CWeather.h>
 using namespace plugin;
 plugin::ThiscallEvent<AddressList<0x7178F0, H_CALL>, PRIORITY_BEFORE, ArgPickNone, void()> renderMoon;
 auto& GetActiveCam() { return TheCamera.m_aCams[TheCamera.m_nActiveCam]; }
@@ -46,15 +50,19 @@ void __fastcall MoonSizePatch(CWeapon* _this, int, CPed* owner, CVector* vecOrig
         ((char(__thiscall*)(CWeapon*, CPed*, CVector*, CVector*, CEntity*, CVector*, CVector*))0x742300)(_this, owner, vecOrigin, _vecEffectPosn, targetEntity, vecTarget, arg_14); // Fire
     }
 }
+
 class MovingMoonSA {
 public:
     MovingMoonSA() {
         // Render moon
         renderMoon += []() {
             CMoon::Render();
+          //  CMoon::RenderTEST();
         };
+
         // Replace default SA moon
         InjectHook(0x713D02, CMoon::Render);
+       // patch::RedirectJump(0x713ACB, CMoon::renderPHASE);
         // Repair moon size changing with a sniper rifle
         InjectHook(0x61ECCD, MoonSizePatch);
         InjectHook(0x628328, MoonSizePatch);
@@ -63,6 +71,6 @@ public:
         InjectHook(0x68626D, MoonSizePatch);
         InjectHook(0x686283, MoonSizePatch);
         InjectHook(0x686787, MoonSizePatch);
-       // InjectHook(0x713C4C, renderMoonMask, PATCH_JUMP);
+        // InjectHook(0x713C4C, renderMoonMask, PATCH_JUMP); I can't figure out moon phases, somebody pls help me :'(
     }
 } MovingMoonSA;

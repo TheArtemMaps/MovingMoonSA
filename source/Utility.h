@@ -1,11 +1,9 @@
-
 #pragma once
 #include "extensions/Screen.h"
 #include "CRect.h"
 #include "CPad.h"
 #include "CDraw.h"
 #include "CVector.h"
-
 static float DotProduct(const CVector& v1, const CVector& v2) {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
